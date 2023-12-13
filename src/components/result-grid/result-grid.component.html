@@ -1,1 +1,20 @@
-<p>result-grid works!</p>
+<h1 mat-dialog-title>Výsledek</h1>
+<div mat-dialog-content class="content">
+  <ag-grid-angular
+    class="ag-theme-quartz-dark"
+    style="height: 100%"
+    [gridOptions]="gridOptions"
+    [columnDefs]="colDefs"
+    [rowData]="data"
+    [suppressMovableColumns]="true"
+    (columnResized)="onColResized($event)"
+  ></ag-grid-angular>
+</div>
+<div mat-dialog-actions align="end">
+  <button *ngIf="!saved" mat-flat-button color="accent" (click)="onSaveClick()">
+    <mat-icon class="material-symbols-outlined">save</mat-icon>
+    Uložit
+  </button>
+  <button *ngIf="!saved" mat-stroked-button color="accent" mat-dialog-close>Zavřít</button>
+  <button *ngIf="saved" mat-flat-button color="accent" mat-dialog-close>Zavřít</button>
+</div>

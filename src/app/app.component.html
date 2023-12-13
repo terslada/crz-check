@@ -1,17 +1,39 @@
 <as-split direction="horizontal" unit="percent" (dragEnd)="onResizeEnded($event)">
   <as-split-area [size]="pohodaSize" minSize="30">
-    <div class="section mat-elevation-z1">
-      <div class="title">Pohoda</div>
-      <app-dropzone label="Přetáhni excel pohody" (fileChange)="onPohodaFileUploaded($event)"></app-dropzone>
+    <div class="section">
+      <div class="title">
+        Pohoda
+        <button *ngIf="pohodaRowData" mat-icon-button (click)="onPohodaCloseClick()">
+          <mat-icon class="material-symbols-outlined">close</mat-icon>
+        </button>
+      </div>
+      <app-dropzone
+        *ngIf="!pohodaRowData"
+        label="Přetáhni excel pohody"
+        (fileChange)="onPohodaFileUploaded($event)"
+      ></app-dropzone>
       <app-pohoda-grid *ngIf="pohodaRowData" [data]="pohodaRowData"></app-pohoda-grid>
     </div>
   </as-split-area>
   <as-split-area [size]="crzSize" minSize="30">
-    <div class="section mat-elevation-z1">
-      <div class="title">CRZ</div>
-      <app-dropzone label="Přetáhni excel crzu" (fileChange)="onCrzFileUploaded($event)"></app-dropzone>
+    <div class="section">
+      <div class="title">
+        CRZ
+        <button *ngIf="crzRowData" mat-icon-button (click)="onCrzCloseClick()">
+          <mat-icon class="material-symbols-outlined">close</mat-icon>
+        </button>
+      </div>
+      <app-dropzone
+        *ngIf="!crzRowData"
+        label="Přetáhni excel crzu"
+        (fileChange)="onCrzFileUploaded($event)"
+      ></app-dropzone>
       <app-crz-grid *ngIf="crzRowData" [data]="crzRowData"></app-crz-grid>
     </div>
   </as-split-area>
 </as-split>
-
+<div class="button">
+  <button [disabled]="!crzRowData || !pohodaRowData" mat-flat-button color="accent" (click)="onCalculateClick()">
+    Přepočítat
+  </button>
+</div>

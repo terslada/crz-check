@@ -1,8 +1,10 @@
 :host {
   display: flex;
-  gap: 40px;
-  padding: 40px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
   height: 100%;
+  align-items: center;
 }
 
 .section {
@@ -17,11 +19,28 @@
 
 .title {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   font-size: 30px;
+  font-weight: bold;
+  height: 48px;
 }
 
 app-crz-grid,
 app-pohoda-grid {
   flex: 1;
+}
+
+.button {
+  background: rgba(65, 62, 62, 0.9294117647);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+button {
+  width: 200px;
 }

@@ -7,3 +7,62 @@
 .as-split-gutter {
   background: unset !important;
 }
+
+.ngx-file-drop__drop-zone {
+  height: 100px;
+  margin: auto;
+  border: 2px dotted white !important;
+  border-radius: 30px;
+  background: #1c2d37;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: var(--border-radius-2);
+
+  &:hover {
+    background-color: #a3a3a3;
+    border-width: 2px;
+  }
+
+  &:active {
+    background-color: #8f8e8e;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background-clip: padding-box;
+  background-color: #f1f1f1;
+  border: 3px solid transparent;
+  border-radius: var(--border-radius-2);
+}
+
+.errorRow {
+  background: #f14c4c;
+}
+
+.errorCell {
+  font-weight: bold;
+  color: #ffff00;
+}
+
+.mat-mdc-snack-bar-label.mdc-snackbar__label {
+  color: white !important;
+  font-weight: bolder !important;
+}
+
+.mdc-snackbar__surface {
+  background: #b50d0d !important;
+}
+
+.error-snackbar {
+  .mdc-button__label {
+    color: #69f0ae !important;
+    font-weight: bold;
+  }
+}
+/*.mdc-button__label {
+  color: #69f0ae !important;
+}*/

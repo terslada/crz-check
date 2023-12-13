@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxFileDropEntry, NgxFileDropModule } from 'ngx-file-drop';
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-dropzone',
   standalone: true,
-  imports: [MatButtonModule, NgxFileDropModule],
+  imports: [MatButtonModule, NgxFileDropModule, MatIconModule],
   templateUrl: './dropzone.component.html',
   styleUrl: './dropzone.component.scss',
 })
