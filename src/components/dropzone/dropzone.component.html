@@ -1,0 +1,8 @@
+<ngx-file-drop [multiple]="false" (onFileDrop)="dropped($event)">
+  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+    <div class="drop-zone">
+      {{ label }}
+      <button mat-flat-button color="accent" (click)="openFileSelector()">Vybrat soubor</button>
+    </div>
+  </ng-template>
+</ngx-file-drop>
