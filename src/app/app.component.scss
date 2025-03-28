@@ -1,5 +1,5 @@
 :host {
-  display: flex;
+  display: block;
   flex-direction: column;
   gap: 10px;
   padding: 20px;
@@ -43,4 +43,12 @@ app-pohoda-grid {
 
 button {
   width: 200px;
+}
+
+.faktury {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+padding-top: 20px;
 }

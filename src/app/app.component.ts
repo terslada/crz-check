@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { AgGridModule } from 'ag-grid-angular';
@@ -13,13 +12,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ResultGridComponent, ResultRow } from '../components/result-grid/result-grid.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import * as xml2js from 'xml2js';
+import { FakturaGridComponent, FakturaRow } from '../components/faktura-grid/faktura-grid.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
-    RouterOutlet,
     NgxFileDropModule,
     MatButtonModule,
     AgGridModule,
@@ -29,6 +30,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     AngularSplitModule,
     MatIconModule,
     MatSnackBarModule,
+    MatTabsModule,
+    FakturaGridComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -36,6 +39,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 export class AppComponent {
   pohodaRowData: PohodaRow[];
   crzRowData: CrzRow[];
+  fakturaRowData: FakturaRow[];
   crzSize: IAreaSize;
   pohodaSize: IAreaSize;
 
@@ -116,6 +120,46 @@ export class AppComponent {
 
       console.log(this.pohodaRowData);
     });
+  }
+
+  onFakturaFileUploaded(file: File) {
+    // file is in xml format, read it
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = async () => {
+      const xml = reader.result as string;
+
+      try {
+        const parser = new xml2js.Parser({ explicitArray: true });
+        const result = await parser.parseStringPromise(xml);
+
+        const invoiceLines = result.Invoice.InvoiceLines[0].InvoiceLine;
+        const groupedData: { [key: string]: number } = {};
+
+        invoiceLines.forEach((line: any) => {
+          const note = line.Note;
+
+          if (!note) {
+            return;
+          }
+
+          const quantity = parseFloat(line.InvoicedQuantity[0]._);
+
+          if (groupedData[note]) {
+            groupedData[note] += quantity;
+          } else {
+            groupedData[note] = quantity;
+          }
+        });
+
+        this.fakturaRowData = Object.entries(groupedData).map(([key, value]) => ({
+          name: key,
+          quantity: value,
+        }));
+      } catch (error) {
+        console.error('Error processing XML:', error);
+      }
+    };
   }
 
   onResizeEnded($event: IOutputData) {

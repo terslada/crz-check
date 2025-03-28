@@ -31,6 +31,7 @@
     "tslib": "^2.3.0",
     "write-excel-file": "^1.4.27",
     "xlsx": "^0.18.5",
+    "xml2js": "^0.6.2",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
@@ -38,6 +39,7 @@
     "@angular/cli": "^17.0.5",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~5.1.0",
+    "@types/xml2js": "^0.4.14",
     "angular-cli-ghpages": "^1.0.7",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
