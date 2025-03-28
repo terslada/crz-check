@@ -37,6 +37,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/crz-check/",
               "budgets": [
                 {
                   "type": "initial",
