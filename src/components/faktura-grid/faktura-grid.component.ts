@@ -20,6 +20,8 @@ export interface FakturaRow {
 export class FakturaGridComponent {
   @Input() data: FakturaRow[];
 
+  doneNames: string[] = [];
+
   colDefs: ColDef<FakturaRow>[] = [
     {
       field: 'name',
@@ -32,7 +34,14 @@ export class FakturaGridComponent {
         suppressFilterButton: true,
       },
       flex: 1,
-      resizable: false
+      resizable: false,
+      cellStyle: params => {
+        if (this.doneNames.includes(params.data.name)) {
+          return { textDecoration: 'line-through', color: 'gray' };
+        }
+        return {};
+      },
+      onCellDoubleClicked: this.onCellDoubleClick.bind(this)
     },
     {
       field: 'quantity',
@@ -44,7 +53,24 @@ export class FakturaGridComponent {
         suppressFilterButton: true,
       },
       width: 150,
-      resizable: false
+      resizable: false,
+      onCellDoubleClicked: this.onCellDoubleClick.bind(this),
+      cellStyle: params => {
+        if (this.doneNames.includes(params.data.name)) {
+          return { textDecoration: 'line-through', color: 'gray' };
+        }
+        return {};
+      },
     },
   ];
+
+  onCellDoubleClick(event: any) {
+    const name = event.data.name;
+    if (this.doneNames.includes(name)) {
+      this.doneNames = this.doneNames.filter(n => n !== name);
+    } else {
+      this.doneNames.push(name);
+    }
+    event.api.refreshCells({ force: true });
+  }
 }
