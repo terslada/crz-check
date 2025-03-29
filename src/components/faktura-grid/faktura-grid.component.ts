@@ -27,6 +27,7 @@ export class FakturaGridComponent {
       filter: 'agTextColumnFilter',
       floatingFilter: true,
       suppressMenu: true,
+      sort: 'asc',
       floatingFilterComponentParams: {
         suppressFilterButton: true,
       },
